@@ -1,0 +1,67 @@
+<div class="main-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark">⚡ BUTT GYM</div>
+      <div class="logo-sub">GYM MANAGEMENT</div>
+    </div>
+
+    <div class="nav-container">
+      <div class="nav-group">
+        <div class="nav-label">MAIN</div>
+        <a class="nav-item" [class.active]="activeNav === 'home'" (click)="navigateTo('home')">
+          <span class="icon">⊞</span> Dashboard
+        </a>
+        <a class="nav-item" [class.active]="activeNav === 'package'" (click)="navigateTo('membership')">
+          <span class="icon">👥</span> Membership Package
+        </a>
+        <a class="nav-item" [class.active]="activeNav === 'members'" (click)="navigateTo('members')">
+          <span class="icon">👥</span> Members
+        </a>
+        <a class="nav-item" [class.active]="activeNav === 'payments'" (click)="navigateTo('payments')">
+          <span class="icon">💳</span> Payments
+        </a>
+        <a class="nav-item" [class.active]="activeNav === 'attendance'" (click)="navigateTo('attendance')">
+          <span class="icon">✓</span> Attendance
+        </a>
+      </div>
+
+      <div class="nav-group">
+        <div class="nav-label">MORE</div>
+        <a class="nav-item" [class.active]="activeNav === 'reports'" (click)="navigateTo('reports')">
+          <span class="icon">📊</span> Reports
+        </a>
+        <a class="nav-item" [class.active]="activeNav === 'classes'" (click)="navigateTo('classes')">
+          <span class="icon">🏋</span> Classes
+        </a>
+        <a class="nav-item" [class.active]="activeNav === 'settings'" (click)="navigateTo('settings')">
+          <span class="icon">⚙</span> Settings
+        </a>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="admin-pill">
+        <div class="avatar">AK</div>
+        <div class="admin-info">
+          <div class="name">Admin Khan</div>
+          <div class="role">Super Admin</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="page-title">{{ pagetitle }}</div>
+      <div class="date-chip">{{ todayDate }}</div>
+    </div>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+</div>

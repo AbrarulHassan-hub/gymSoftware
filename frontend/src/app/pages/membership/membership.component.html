@@ -1,0 +1,81 @@
+<div class="member-directory">
+
+  <div class="dir-header">
+    <h2 class="dir-title">Member Directory</h2>
+    <div class="dir-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search members..." />
+      </div>
+      <button class="btn-add" (click)="toggleModal(true)">＋ Add Member</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" /></th>
+           <th>Plan Code</th>
+          <th>Plan Name</th>
+          <th>Duration</th>
+          <th>Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (m of membership; track m.initials) {
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td class="muted">{{ m.code }}</td>
+            <td>
+              <div class="member-cell">
+                <div class="avatar">{{ m.initials }}</div>
+                <span>{{ m.name }}</span>
+              </div>
+            </td>
+            <td class="muted">{{ m.duration }}</td>
+             <td class="muted">{{ m.amount }}</td>
+            <td class="dots">⋮</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (showModal) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>ADD Member Plan</h3>
+          <span class="close-x" (click)="toggleModal(false)">&times;</span>
+        </div>
+
+        <form class="member-form">
+          <div class="f-group">
+            <label>Plan Code</label>
+            <input type="text" placeholder="Enter Code">
+          </div>
+          <div class="f-group">
+            <label>Plan Name</label>
+            <input type="text" placeholder="Enter Plan Name">
+          </div>
+          <div class="f-group">
+            <label>Duration</label>
+           <input type="text" placeholder="Duration">
+          </div>
+          <div class="f-group">
+            <label>Amount</label>
+            <input type="number">
+          </div>
+          
+          <div class="modal-footer">
+            <button type="submit" class="btn-save">Save PLan</button>
+            <button type="button" class="btn-cancel" (click)="toggleModal(false)">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+</div>

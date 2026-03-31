@@ -1,0 +1,109 @@
+<!-- Stats Cards -->
+<div class="cards-row">
+  @for (stat of stats; track stat.label) {
+    <div class="card {{ stat.color }}">
+      <div class="card-label">{{ stat.label }}</div>
+      <div class="card-value">{{ stat.value }}</div>
+      <div class="card-delta">
+        <span class="delta-up">{{ stat.delta }}</span>&nbsp;{{ stat.sub }}
+      </div>
+      <div class="card-icon">{{ stat.icon }}</div>
+    </div>
+  }
+</div>
+
+<!-- Quick Actions -->
+<div class="section-header">Quick Actions</div>
+<div class="actions-row">
+  <div class="action-btn">
+    <div class="action-icon-box">➕</div>
+    <div class="action-text">
+      <div class="title">Add Member</div>
+      <div class="sub">Register new member</div>
+    </div>
+  </div>
+  <div class="action-btn">
+    <div class="action-icon-box">💰</div>
+    <div class="action-text">
+      <div class="title">Record Payment</div>
+      <div class="sub">Log a transaction</div>
+    </div>
+  </div>
+  <div class="action-btn">
+    <div class="action-icon-box">✔</div>
+    <div class="action-text">
+      <div class="title">Mark Attendance</div>
+      <div class="sub">Check in members</div>
+    </div>
+  </div>
+  <div class="action-btn">
+    <div class="action-icon-box">📈</div>
+    <div class="action-text">
+      <div class="title">View Reports</div>
+      <div class="sub">Analytics & exports</div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Panels -->
+<div class="bottom-grid">
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">Recent Members</div>
+      <div class="panel-action">View all →</div>
+    </div>
+    @for (m of recentMembers; track m.name) {
+      <div class="member-row">
+        <div class="member-avatar"
+             [style.background]="m.color"
+             [style.color]="m.textColor">
+          {{ m.initials }}
+        </div>
+        <div class="member-info">
+          <div class="member-name">{{ m.name }}</div>
+          <div class="member-meta">{{ m.meta }}</div>
+        </div>
+        <span class="badge {{ m.badgeClass }}">{{ m.badge }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-title">Weekly Attendance</div>
+      <div class="panel-action">Full report →</div>
+    </div>
+    <div class="chart-area">
+      <div class="bars">
+        @for (b of attendanceBars; track b.day) {
+          <div class="bar-col">
+            <div class="bar"
+                 [class.today]="b.isToday"
+                 [style.height.px]="b.height">
+            </div>
+            <div class="bar-label"
+                 [style.color]="b.isToday ? 'var(--accent)' : 'var(--muted)'">
+              {{ b.day }}
+            </div>
+          </div>
+        }
+      </div>
+      <div class="chart-stat">
+        <div class="stat-item">
+          <div class="s-val">416</div>
+          <div class="s-label">This Week</div>
+        </div>
+        <div class="stat-item">
+          <div class="s-val">59</div>
+          <div class="s-label">Daily Avg</div>
+        </div>
+        <div class="stat-item">
+          <div class="s-val">85</div>
+          <div class="s-label">Peak Day (Thu)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

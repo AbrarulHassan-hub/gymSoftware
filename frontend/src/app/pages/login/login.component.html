@@ -1,0 +1,48 @@
+<div class="login-bg">
+  <div class="login-card">
+
+    <!-- LEFT -->
+    <div class="lc-left">
+      <div class="lc-left-bg"></div>
+      <div class="particles">
+        <span class="p"></span><span class="p"></span><span class="p"></span>
+        <span class="p"></span><span class="p"></span><span class="p"></span>
+        <span class="p"></span><span class="p"></span>
+      </div>
+      <div class="lc-logo">
+        <div class="lc-logo-icon">BG</div>
+        <div class="lc-logo-text">
+          <div class="gym-name">BUTT GYM</div>
+          <div class="gym-sub">Train Hard · Live Strong</div>
+        </div>
+      </div>
+<div class="athlete-wrap">
+  <img class="athlete-img"
+       src="assets/images/login.png"
+       alt="Athlete">
+</div>
+      <div class="lc-stripe"></div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="lc-right">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <div class="form-title">LOGIN<br><span>NOW</span></div>
+      <div class="form-sub">To Track Your Fitness Goals</div>
+      <div class="field">
+        <input type="text" [(ngModel)]="loginObject.name" placeholder="User Name" />
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      </div>
+      <div class="field">
+        <input type="password" [(ngModel)]="loginObject.password" placeholder="Password" />
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <button class="btn-login" (click)="loginUser()">LOGIN NOW</button>
+      <div class="form-links">
+        Don't have an account? <a href="#">Register Now</a>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<div class="member-directory">
+
+  <div class="dir-header">
+    <h2 class="dir-title">Member Directory</h2>
+    <div class="dir-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search members..." />
+      </div>
+      <button class="btn-add" (click)="toggleModal(true)">＋ Add Member</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" /></th>
+          <th>Member</th>
+          <th>ID</th>
+          <th>Membership Plan</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (m of members; track m.id) {
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td>
+              <div class="member-cell">
+                <div class="avatar">{{ m.initials }}</div>
+                <span>{{ m.name }}</span>
+              </div>
+            </td>
+            <td class="muted">{{ m.id }}</td>
+            <td class="muted">{{ m.plan }}</td>
+            <td>
+              <span class="badge {{ m.statusClass }}">{{ m.status }}</span>
+            </td>
+            <td class="dots">⋮</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (showModal) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>ADD NEW MEMBER</h3>
+          <span class="close-x" (click)="toggleModal(false)">&times;</span>
+        </div>
+
+        <form class="member-form">
+          <div class="f-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter name">
+          </div>
+          <div class="f-group">
+            <label>Phone Number</label>
+            <input type="text" placeholder="03xx xxxxxxx">
+          </div>
+          <div class="f-group">
+            <label>Membership Type</label>
+            <select>
+              <option>Monthly Plan</option>
+              <option>Quarterly Plan</option>
+              <option>Annual Plan</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label>Start Date</label>
+            <input type="date">
+          </div>
+          
+          <div class="modal-footer">
+            <button type="submit" class="btn-save">Save Member</button>
+            <button type="button" class="btn-cancel" (click)="toggleModal(false)">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+</div>
