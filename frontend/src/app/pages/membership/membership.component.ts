@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-membership',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './membership.component.html',
   styleUrl: './membership.component.css'
 })
@@ -22,5 +23,6 @@ export class MembershipComponent {
     { initials: 'S', code: "Q-P2", name: "Standard", duration: "3 Months", amount: 5500 },
     { initials: 'B', code: "Y-P1", name: "Basic", duration: "12 Months", amount: 10000},
     { initials: 'P', code: "Y-P2", name: "Premium", duration: "12 Months", amount: 18000}
+    
   ];
 }
