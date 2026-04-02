@@ -24,20 +24,18 @@
         </tr>
       </thead>
       <tbody>
-        @for (m of members; track m.id) {
+        @for (m of memberdata; track m.Id) {
           <tr>
             <td><input type="checkbox" /></td>
             <td>
               <div class="member-cell">
-                <div class="avatar">{{ m.initials }}</div>
-                <span>{{ m.name }}</span>
+                <span>{{ m.Code }}</span>
               </div>
             </td>
-            <td class="muted">{{ m.id }}</td>
-            <td class="muted">{{ m.plan }}</td>
-            <td>
-              <span class="badge {{ m.statusClass }}">{{ m.status }}</span>
-            </td>
+            <td class="muted">{{ m.Name }}</td>
+            <td class="muted">{{ m.PhoneNo }}</td>
+            <td class="muted">{{ m.StartDate }}</td>
+            <td class="muted">{{ m.Status ? "Active": "InActive" }}</td>
             <td class="dots">⋮</td>
           </tr>
         }
@@ -53,27 +51,37 @@
           <span class="close-x" (click)="toggleModal(false)">&times;</span>
         </div>
 
-        <form class="member-form">
+        <form class="member-form" (submit)="$event.preventDefault()">
           <div class="f-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter name">
+            <label>Code</label>
+            <input type="text" [(ngModel)]="memberForm.Code" name="Code" placeholder="Enter Code">
           </div>
           <div class="f-group">
-            <label>Phone Number</label>
-            <input type="text" placeholder="03xx xxxxxxx">
+            <label>Full Name</label>
+            <input type="text" [(ngModel)]="memberForm.Name" name="Name" placeholder="Enter name">
           </div>
           <div class="f-group">
             <label>Membership Type</label>
-            <select>
-              <option>Monthly Plan</option>
-              <option>Quarterly Plan</option>
-              <option>Annual Plan</option>
+            <select [(ngModel)] = "memberForm.PlanId" name="PlanId">
+              <option value="0">select Membership Plan</option>
+              @for (item of membershipPlans; track item.id) {
+                <option [value]="item.id">{{item.name}}</option>
+              }
             </select>
           </div>
           <div class="f-group">
-            <label>Start Date</label>
-            <input type="date">
+            <label>Phone Number</label>
+            <input type="text" [(ngModel)] = "memberForm.PhoneNo" name="PhoneNo" placeholder="03xx xxxxxxx">
           </div>
+          
+          <div class="f-group">
+            <label>Start Date</label>
+            <input type="date" [(ngModel)] = "memberForm.StartDate" name="StartDate">
+          </div>
+          <div class="f-group">
+      <label>Status</label>
+  <input type="checkbox" [(ngModel)]="memberForm.Status" name="Status"  name="Status">
+      </div>
           
           <div class="modal-footer">
             <button type="submit" class="btn-save">Save Member</button>

@@ -12,8 +12,8 @@ using gymsoftware.Data;
 namespace gymsoftware.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260402094527_newcoumnsupdate")]
-    partial class newcoumnsupdate
+    [Migration("20260402102228_AddForeignKey")]
+    partial class AddForeignKey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,6 +74,8 @@ namespace gymsoftware.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PlanId");
+
                     b.ToTable("Members");
                 });
 
@@ -100,6 +102,17 @@ namespace gymsoftware.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Membership");
+                });
+
+            modelBuilder.Entity("gymsoftware.Model.members", b =>
+                {
+                    b.HasOne("gymsoftware.Model.membershipplan", "Membershipplan")
+                        .WithMany()
+                        .HasForeignKey("PlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Membershipplan");
                 });
 #pragma warning restore 612, 618
         }

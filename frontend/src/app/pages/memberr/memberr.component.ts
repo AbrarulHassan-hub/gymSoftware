@@ -1,14 +1,65 @@
-import { Component } from '@angular/core';
+import { Component,inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
+import { HttpClient,HttpClientModule } from '@angular/common/http';
+interface Members {
+  Id: number;
+  Code:string;
+  Name: string;
+  PlanId: number;
+  PhoneNo: string;
+  StartDate:Date;
+  Status:boolean
+}
+interface Membership {
+  id: number;
+  code:string;
+  name: string;
+  duration: string;
+  amount: number;
+}
 @Component({
   selector: 'app-memberr',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule,HttpClientModule],
   templateUrl: './memberr.component.html',
   styleUrls: ['./memberr.component.css']
 })
-export class MemberrComponent {
+export class MemberrComponent implements OnInit{
+  //getrecord of members
+  ngOnInit(): void {
+    this.getMembers();
+    this.getMembershipPlans() 
+  }
+  memberForm: Members = {
+  Id: 0,
+  Code: '',
+  Name: '',
+  PlanId: 0,
+  PhoneNo: '',
+  StartDate: new Date(),
+  Status: false
+};
+  memberdata:Members[]=[];
+  membershipPlans: Membership[] = [];
+  http = inject(HttpClient);
+  getMembershipPlans() 
+  {
+      this.http.get<Membership[]>("https://localhost:7233/api/membership").subscribe({next:(res)=>{
+          this.membershipPlans=res;
+          console.log(this.membershipPlans);
+        },error:(err)=>{
+          console.error("Error: ",err);
+        }})
+  }
+  getMembers()
+  {
+    this.http.get<Members[]>("https://localhost:7233/api/members").subscribe({next:(res)=>{
+      this.memberdata = res;
+    }})
+  }
+  //End Get Record Members
+
   //Model Show 
   showModal:boolean=false;
 toggleModal(state:boolean)
