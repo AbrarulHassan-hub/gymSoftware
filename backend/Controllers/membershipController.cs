@@ -27,7 +27,7 @@ namespace gymsoftware.Controllers
             return Ok(allmembership);
         }
         [HttpPut("{id}")]
-        public async Task<ActionResult> updateMemberShip(int id, [FromForm] membershipplan memberships)
+        public async Task<ActionResult> updateMemberShip(int id, [FromBody] membershipplan memberships)
         {
             await membership.updateMembership(id, memberships);
             return Ok(membership);
@@ -37,6 +37,12 @@ namespace gymsoftware.Controllers
         {
             await membership.deleteMembership(id);
             return Ok();
+        }
+        [HttpGet("count")]
+        public async Task<ActionResult> CountMemberships()
+        {
+            var totalMembers = await membership.CountMemberbships();
+            return Ok(totalMembers);
         }
     }
 }

@@ -51,5 +51,6 @@ namespace gymsoftware.Repository
                 await db.SaveChangesAsync();
             }
         }
+      
     }
 }

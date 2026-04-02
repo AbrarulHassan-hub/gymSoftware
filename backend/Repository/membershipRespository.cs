@@ -29,14 +29,16 @@ namespace gymsoftware.Repository
             }
             else
             {
-                membership.MembershipPlanName = mship.MembershipPlanName;
-                membership.Amount = mship.Amount;
+                membership.code = mship.code;
+                membership.name = mship.name;
+                membership.duration = mship.duration;
+                membership.amount = mship.amount;
                 await db.SaveChangesAsync();
             }
         }
         public async Task deleteMembership(int id)
         {
-            var membership = await db.Membership.FirstOrDefaultAsync(x => x.Id == id);
+            var membership = await db.Membership.FirstOrDefaultAsync(x => x.id == id);
             if (membership == null)
             {
                 throw new Exception("Membership not Found");
@@ -46,7 +48,10 @@ namespace gymsoftware.Repository
                 db.Membership.Remove(membership);
                 await db.SaveChangesAsync();
             }
-
+        }
+        public async Task<int> CountMemberbships()
+        {
+            return await db.Membership.CountAsync();
         }
 
     }

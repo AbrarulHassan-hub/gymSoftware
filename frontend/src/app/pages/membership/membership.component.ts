@@ -69,7 +69,7 @@ export class MembershipComponent implements OnInit {
   UpdateRecord() {
   const payload = {
     id: this.membershipObject.id,
-    Code: this.membershipObject.code,
+    code: this.membershipObject.code,
     name: this.membershipObject.name,
     duration: this.membershipObject.duration,
     amount: this.membershipObject.amount
