@@ -100,15 +100,31 @@
 }
 
 table {
-  width: 100%;
+  width: 100%;           /* width: auto; tha — ise 100% karo */
   border-collapse: collapse;
+  table-layout: fixed;   /* columns evenly distribute honge */
 }
+
+/* Column widths fix karo */
+thead th:nth-child(1) { width: 20%; }   /* Plan Code */
+thead th:nth-child(2) { width: 25%; }   /* Plan Name */
+thead th:nth-child(3) { width: 20%; }   /* Duration */
+thead th:nth-child(4) { width: 15%; }   /* Amount */
+thead th:nth-child(5) { width: 20%; }   /* Actions */
 
 thead tr {
   border-bottom: 1px solid var(--border);
   background: var(--surface2);
 }
+tbody td {
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--text) !important;
+}
 
+.muted { 
+  color: var(--text) !important; 
+}
 thead th {
   padding: 12px 16px;
   font-size: 11px;
@@ -258,4 +274,42 @@ input[type="checkbox"] {
   color: #888;
   border: none;
   cursor: pointer;
+}
+/* Action Button UI */
+
+/* ─── ACTION BUTTONS ─────────────────────────── */
+.action-menu {
+  display: flex;
+  gap: 8px;
+}
+.action-menu button {
+  padding: 5px 14px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Barlow', sans-serif;
+  cursor: pointer;
+  color: #ffffff;
+  transition: background 0.18s, transform 0.12s;
+  letter-spacing: 0.04em;
+}
+
+.btn-edit {
+  background-color: #3a3a50;
+}
+
+.btn-edit:hover {
+  background-color: var(--accent);  
+  color: var(--bg);
+  transform: translateY(-1px);
+}
+
+.btn-delete {
+  background-color: #3a3a50;
+}
+
+.btn-delete:hover {
+  background-color: var( --red);   
+  transform: translateY(-1px);
 }

@@ -7,7 +7,7 @@
         <span class="search-icon">🔍</span>
         <input type="text" placeholder="Search members..." />
       </div>
-      <button class="btn-add" (click)="toggleModal(true)">＋ Add Member</button>
+      <button class="btn-add" (click)="resetForm()">＋ Add Member</button>
     </div>
   </div>
 
@@ -15,31 +15,33 @@
     <table>
       <thead>
         <tr>
-          <th><input type="checkbox" /></th>
            <th>Plan Code</th>
           <th>Plan Name</th>
           <th>Duration</th>
           <th>Amount</th>
-          <th></th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        @for (m of membership; track m.initials) {
-          <tr>
-            <td><input type="checkbox" /></td>
-            <td class="muted">{{ m.code }}</td>
-            <td>
-              <div class="member-cell">
-                <div class="avatar">{{ m.initials }}</div>
-                <span>{{ m.name }}</span>
-              </div>
-            </td>
-            <td class="muted">{{ m.duration }}</td>
-             <td class="muted">{{ m.amount }}</td>
-            <td class="dots">⋮</td>
-          </tr>
-        }
-      </tbody>
+  @for (m of memberships; track m.id) {
+    <tr>
+      <td style="color: #ffffff;">{{ m.code }}</td>
+      <td style="color: #ffffff;">
+        <div class="member-cell">
+          <span>{{ m.name }}</span>
+        </div>
+      </td>
+      <td style="color: #ffffff;">{{ m.duration }}</td>
+      <td style="color: #ffffff;">{{ m.amount }}</td>
+      <td>
+        <div class="action-menu">
+          <button class="btn-edit" (click)="onEditMod(m)">Edit</button>
+          <button class="btn-delete" (click)="OnDelete(m.id)">Delete</button>
+        </div>
+      </td>
+    </tr>
+  }
+</tbody>
     </table>
   </div>
 
@@ -47,30 +49,43 @@
     <div class="modal-overlay">
       <div class="modal-card">
         <div class="modal-header">
-          <h3>ADD MemberShip Plan</h3>
+          @if (membershipObject.id !=0) 
+          {
+            <h3>Edit MemberShip Plan</h3>
+          }
+          @else {
+            <h3>Add MemberShip Plan</h3>
+          }
           <span class="close-x" (click)="toggleModal(false)">&times;</span>
         </div>
 
-        <form class="member-form">
+        <form class="member-form" (submit)="$event.preventDefault()">
           <div class="f-group">
             <label>Plan Code</label>
-            <input type="text" placeholder="Enter Code">
+            <input type="hidden" [(ngModel)]="membershipObject.id" id="id" name="id">
+            <input type="text" [(ngModel)]="membershipObject.code" id="Code" name="code" placeholder="Enter Code">
           </div>
           <div class="f-group">
             <label>Plan Name</label>
-            <input type="text" placeholder="Enter Plan Name">
+            <input type="text" [(ngModel)]="membershipObject.name" name="name" placeholder="Enter Plan Name">
           </div>
           <div class="f-group">
             <label>Duration</label>
-           <input type="text" placeholder="Duration">
+           <input type="text" [(ngModel)]="membershipObject.duration" name="duration" placeholder="Enter Duration">
           </div>
           <div class="f-group">
             <label>Amount</label>
-            <input type="number">
+            <input type="number" [(ngModel)]="membershipObject.amount" name="amount" >
           </div>
           
           <div class="modal-footer">
-            <button type="submit" class="btn-save">Save PLan</button>
+          @if (membershipObject.id !=0) 
+          {
+            <button type="button" class="btn-save" (click)="UpdateRecord()">Edit PLan</button>
+          }
+          @else {
+            <button type="button" class="btn-save" (click)="addMemberShip()">Save PLan</button>
+          }
             <button type="button" class="btn-cancel" (click)="toggleModal(false)">Cancel</button>
           </div>
         </form>
