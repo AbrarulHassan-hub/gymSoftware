@@ -15,28 +15,34 @@
     <table>
       <thead>
         <tr>
-          <th><input type="checkbox" /></th>
-          <th>Member</th>
-          <th>ID</th>
+          <th>Code</th>
+          
+          <th>Name</th>
           <th>Membership Plan</th>
+          <th>PhoneNo</th>
+          <th>StartDate</th>
           <th>Status</th>
+          <th>Actions</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        @for (m of memberdata; track m.Id) {
+        @for (m of memberdata; track m.id) {
           <tr>
-            <td><input type="checkbox" /></td>
             <td>
               <div class="member-cell">
-                <span>{{ m.Code }}</span>
+                <span>{{ m.code }}</span>
               </div>
             </td>
-            <td class="muted">{{ m.Name }}</td>
-            <td class="muted">{{ m.PhoneNo }}</td>
-            <td class="muted">{{ m.StartDate }}</td>
-            <td class="muted">{{ m.Status ? "Active": "InActive" }}</td>
-            <td class="dots">⋮</td>
+            <td class="muted">{{ m.name }}</td>
+             <td class="muted">{{ getPlanName(m.planId) }}</td>
+            <td class="muted">{{ m.phoneNo }}</td>
+            <td class="muted">{{ m.startDate | date:'fulldate' }}</td>
+            <td class="muted">{{ m.status ? "Active": "InActive" }}</td>
+            <div class="action-menu">
+          <button class="btn-edit" >Edit</button>
+          <button class="btn-delete" >Delete</button>
+        </div>
           </tr>
         }
       </tbody>
@@ -54,15 +60,15 @@
         <form class="member-form" (submit)="$event.preventDefault()">
           <div class="f-group">
             <label>Code</label>
-            <input type="text" [(ngModel)]="memberForm.Code" name="Code" placeholder="Enter Code">
+            <input type="text" [(ngModel)]="memberForm.code" name="Code" placeholder="Enter Code">
           </div>
           <div class="f-group">
             <label>Full Name</label>
-            <input type="text" [(ngModel)]="memberForm.Name" name="Name" placeholder="Enter name">
+            <input type="text" [(ngModel)]="memberForm.name" name="Name" placeholder="Enter name">
           </div>
           <div class="f-group">
             <label>Membership Type</label>
-            <select [(ngModel)] = "memberForm.PlanId" name="PlanId">
+            <select [(ngModel)] = "memberForm.planId" name="PlanId">
               <option value="0">select Membership Plan</option>
               @for (item of membershipPlans; track item.id) {
                 <option [value]="item.id">{{item.name}}</option>
@@ -71,21 +77,24 @@
           </div>
           <div class="f-group">
             <label>Phone Number</label>
-            <input type="text" [(ngModel)] = "memberForm.PhoneNo" name="PhoneNo" placeholder="03xx xxxxxxx">
+            <input type="text" [(ngModel)] = "memberForm.phoneNo" name="PhoneNo" placeholder="03xx xxxxxxx">
           </div>
           
           <div class="f-group">
             <label>Start Date</label>
-            <input type="date" [(ngModel)] = "memberForm.StartDate" name="StartDate">
+            <input type="date" [(ngModel)] = "memberForm.startDate" name="StartDate">
           </div>
-          <div class="f-group">
-      <label>Status</label>
-  <input type="checkbox" [(ngModel)]="memberForm.Status" name="Status"  name="Status">
-      </div>
-          
-          <div class="modal-footer">
-            <button type="submit" class="btn-save">Save Member</button>
-            <button type="button" class="btn-cancel" (click)="toggleModal(false)">Cancel</button>
+              <div class="f-group">
+            <label>Status</label>
+            <select [(ngModel)] = "memberForm.status" name="Status">
+              <option value="0" disabled>select Status</option>
+              <option value="true">Active</option>
+              <option value="false">InActive</option>
+            </select>
+          </div>
+           <div class="modal-footer">
+         <button type="button" class="btn-save" (click)="saveMember()" >Save PLan</button>
+          <button type="button" class="btn-cancel" (click)="toggleModal(false)">Cancel</button>
           </div>
         </form>
       </div>
