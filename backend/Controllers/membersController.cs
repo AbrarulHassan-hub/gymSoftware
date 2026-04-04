@@ -39,5 +39,11 @@ namespace gymsoftware.Controllers
             await members.Deletemember(id);
             return Ok(members);
         }
+        [HttpGet("Countmember")]
+        public async Task<ActionResult> ContMember()
+        {
+            var countMember = await members.CountMember();
+            return Ok(countMember);
+        }
     }
 }
