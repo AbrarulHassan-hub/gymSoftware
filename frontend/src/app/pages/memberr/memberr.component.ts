@@ -70,7 +70,6 @@ toggleModal(state:boolean)
 {
   this.showModal=state;
 }
-
 saveMember()
 {
     const payload = {
@@ -86,6 +85,13 @@ saveMember()
     alert("Member Added Successfully");
     this.getMembers();
     this.toggleModal(false);
+  })
+}
+deleteMember(id:number)
+{
+  this.http.delete(`https://localhost:7233/api/members/${id}`).subscribe((res:any)=>{
+  alert("Member Deleted Successfully");
+  this.getMembers();
   })
 }
 

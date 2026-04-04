@@ -16,7 +16,7 @@
       <thead>
         <tr>
           <th>Code</th>
-          
+
           <th>Name</th>
           <th>Membership Plan</th>
           <th>PhoneNo</th>
@@ -37,11 +37,11 @@
             <td class="muted">{{ m.name }}</td>
              <td class="muted">{{ getPlanName(m.planId) }}</td>
             <td class="muted">{{ m.phoneNo }}</td>
-            <td class="muted">{{ m.startDate | date:'fulldate' }}</td>
+            <td class="muted">{{ m.startDate | date:'dd MMMM yyyy' }}</td>
             <td class="muted">{{ m.status ? "Active": "InActive" }}</td>
             <div class="action-menu">
           <button class="btn-edit" >Edit</button>
-          <button class="btn-delete" >Delete</button>
+          <button class="btn-delete" (click)="deleteMember(m.id)">Delete</button>
         </div>
           </tr>
         }
