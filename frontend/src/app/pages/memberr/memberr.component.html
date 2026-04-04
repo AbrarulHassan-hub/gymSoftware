@@ -7,7 +7,7 @@
         <span class="search-icon">🔍</span>
         <input type="text" placeholder="Search members..." />
       </div>
-      <button class="btn-add" (click)="toggleModal(true)">＋ Add Member</button>
+      <button class="btn-add" (click)="toggleModalAdd()">＋ Add Member</button>
     </div>
   </div>
 
@@ -40,7 +40,7 @@
             <td class="muted">{{ m.startDate | date:'dd MMMM yyyy' }}</td>
             <td class="muted">{{ m.status ? "Active": "InActive" }}</td>
             <div class="action-menu">
-          <button class="btn-edit" >Edit</button>
+          <button class="btn-edit" (click)="editmember(m)">Edit</button>
           <button class="btn-delete" (click)="deleteMember(m.id)">Delete</button>
         </div>
           </tr>
@@ -53,7 +53,13 @@
     <div class="modal-overlay">
       <div class="modal-card">
         <div class="modal-header">
-          <h3>ADD NEW MEMBER</h3>
+           @if (memberForm.id != 0) {
+            <h3>EDIT MEMBER</h3>
+          }
+          @else {
+            <h3>ADD NEW MEMBER</h3>
+          }
+          
           <span class="close-x" (click)="toggleModal(false)">&times;</span>
         </div>
 
@@ -93,7 +99,12 @@
             </select>
           </div>
            <div class="modal-footer">
-         <button type="button" class="btn-save" (click)="saveMember()" >Save PLan</button>
+          @if (memberForm.id != 0) {
+            <button type="button" class="btn-save" (click)="updateMember()" >Edit PLan</button>
+          }
+          @else {
+            <button type="button" class="btn-save" (click)="saveMember()" >Save PLan</button>
+          }
           <button type="button" class="btn-cancel" (click)="toggleModal(false)">Cancel</button>
           </div>
         </form>

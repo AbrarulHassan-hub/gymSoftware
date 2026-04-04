@@ -94,6 +94,49 @@ deleteMember(id:number)
   this.getMembers();
   })
 }
+editmember(member: Members)
+{
+  this.memberForm.id = member.id;
+  this.memberForm.code = member.code;
+  this.memberForm.name = member.name;
+  this.memberForm.planId = member.planId;
+  this.memberForm.phoneNo = member.phoneNo;
+   //  Date ko yyyy-MM-dd format mein convert karo
+  const d = new Date(member.startDate);
+  this.memberForm.startDate = d.toISOString().split('T')[0] as any;
+  this.memberForm.status = member.status;
+  this.toggleModal(true);
+}
+updateMember()
+{
+    const payload = {
+    Id: Number(this.memberForm.id),
+    Code: Number(this.memberForm.code),
+    Name: String(this.memberForm.name),
+    PlanId: Number(this.memberForm.planId),
+    PhoneNO: String(this.memberForm.phoneNo),
+    StartDate: new Date(this.memberForm.startDate),
+    Status: Boolean(this.memberForm.status)
+  };
+  this.http.put(`https://localhost:7233/api/members/${payload.Id}`,payload).subscribe(((res:any)=>{
+    alert("Member updated Successfully");
+    this.getMembers();
+    this.toggleModal(false);
+  }))
+}
+toggleModalAdd()
+{
+  this.memberForm = {
+  id: 0,
+  code: 0,
+  name: '',
+  planId: 0,
+  phoneNo: '',
+  startDate: new Date(),
+  status: false
+  }
+  this.toggleModal(true);
+}
 
 
 
