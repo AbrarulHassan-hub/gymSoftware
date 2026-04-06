@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gymsoftware.Data;
 
@@ -11,9 +12,11 @@ using gymsoftware.Data;
 namespace gymsoftware.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260406085130_NewTableCreatePayments")]
+    partial class NewTableCreatePayments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,11 +39,11 @@ namespace gymsoftware.Migrations
                     b.Property<int>("MemberId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PaymentStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("int");
 
-                    b.Property<string>("PaymentType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

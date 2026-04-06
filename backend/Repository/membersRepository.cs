@@ -53,7 +53,7 @@ namespace gymsoftware.Repository
         }
         public async Task<int> CountMember()
         {
-            return await db.Membership.CountAsync();
+            return await db.Members.CountAsync();
         }
 
     }

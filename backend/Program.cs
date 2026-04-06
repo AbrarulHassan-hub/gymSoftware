@@ -20,6 +20,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 builder.Services.AddScoped<LoginRepository>();
 builder.Services.AddScoped<membershipRespository>();
 builder.Services.AddScoped<membersRepository>();
+builder.Services.AddScoped<PaymentRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
