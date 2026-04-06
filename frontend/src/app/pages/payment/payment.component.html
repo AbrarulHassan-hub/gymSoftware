@@ -1,0 +1,88 @@
+<div class="member-directory">
+
+  <div class="dir-header">
+    <h2 class="dir-title">Member Payment</h2>
+    <div class="dir-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search members..." />
+      </div>
+      <button class="btn-add" >＋ Add Payment</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+           <th>Plan Code</th>
+          <th>Plan Name</th>
+          <th>Duration</th>
+          <th>Amount</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+  @for (m of membership; track m.code) {
+    <tr>
+      <td style="color: #ffffff;">{{ m.code }}</td>
+      <td style="color: #ffffff;">
+        <div class="member-cell">
+          <span>{{ m.name }}</span>
+        </div>
+      </td>
+      <td style="color: #ffffff;">{{ m.duration }}</td>
+      <td style="color: #ffffff;">{{ m.amount }}</td>
+      <td>
+        <div class="action-menu">
+          <button class="btn-edit" >Edit</button>
+          <button class="btn-delete" >Delete</button>
+        </div>
+      </td>
+    </tr>
+  }
+</tbody>
+    </table>
+  </div>
+
+
+    <div class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+
+            <h3>Add Payment Member</h3>
+
+          <span class="close-x" >&times;</span>
+        </div>
+
+        <form class="member-form" >
+          <div class="f-group">
+            <label>Plan Code</label>
+            <input type="hidden"  id="id" name="id">
+            <input type="text"  id="Code" name="code" placeholder="Enter Code">
+          </div>
+          <div class="f-group">
+            <label>Plan Name</label>
+            <input type="text"  name="name" placeholder="Enter Plan Name">
+          </div>
+          <div class="f-group">
+            <label>Duration</label>
+           <input type="text"  name="duration" placeholder="Enter Duration">
+          </div>
+          <div class="f-group">
+            <label>Amount</label>
+            <input type="number"  name="amount" >
+          </div>
+          
+          <div class="modal-footer">
+
+       
+            <button type="button" class="btn-save" >Save Payment</button>
+
+            <button type="button" class="btn-cancel" >Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+</div>
