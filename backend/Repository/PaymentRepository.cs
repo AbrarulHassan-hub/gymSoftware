@@ -50,6 +50,10 @@ namespace gymsoftware.Repository
 
             }
         }
+        public async Task<int> TotalPayment()
+        {
+            return await db.Payments.CountAsync();
+        }
 
     }
 }

@@ -39,5 +39,11 @@ namespace gymsoftware.Controllers
             await payment.UpdatePayment(id, objPayment);
             return Ok(payment);
         }
+        [HttpGet("CountPayment")]
+        public async Task<ActionResult> TotalPayment()
+        {
+            var totalpayment = await payment.TotalPayment();
+            return Ok(totalpayment);
+        }
     }
 }

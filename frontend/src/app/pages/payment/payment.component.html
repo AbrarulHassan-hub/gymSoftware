@@ -7,7 +7,7 @@
         <span class="search-icon">🔍</span>
         <input type="text" placeholder="Search members..." />
       </div>
-      <button class="btn-add" >＋ Add Payment</button>
+      <button class="btn-add" (click)="ToggleModelAdd()">＋ Add Payment</button>
     </div>
   </div>
 
@@ -15,29 +15,36 @@
     <table>
       <thead>
         <tr>
-           <th>Plan Code</th>
-          <th>Plan Name</th>
-          <th>Duration</th>
+           <th>Member Name</th>
           <th>Amount</th>
+          <th>Payment Type</th>
+          <th>Payment Status</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-  @for (m of membership; track m.code) {
+  @for (m of paymentRecord; track m.id) {
     <tr>
-      <td style="color: #ffffff;">{{ m.code }}</td>
+      <td style="color: #ffffff;">{{ getMemberName(m.memberId) }}</td>
       <td style="color: #ffffff;">
         <div class="member-cell">
-          <span>{{ m.name }}</span>
+          <span>{{ m.amount }}</span>
         </div>
       </td>
-      <td style="color: #ffffff;">{{ m.duration }}</td>
-      <td style="color: #ffffff;">{{ m.amount }}</td>
+      <td style="color: #ffffff;">{{ m.paymentType }}</td>
+      <td style="color: #ffffff;">{{ m.paymentStatus }}</td>
       <td>
         <div class="action-menu">
-          <button class="btn-edit" >Edit</button>
-          <button class="btn-delete" >Delete</button>
+          <button class="btn-edit" (click)="EditPayment(m)">Edit</button>
+          <button class="btn-delete" (click)="DeletePayment(m.id)" >Delete</button>
         </div>
+      </td>
+    </tr>
+  }
+   @empty {
+    <tr>
+      <td colspan="5" style="text-align: center; color: #888; padding: 20px;">
+        No Record Found
       </td>
     </tr>
   }
@@ -45,44 +52,67 @@
     </table>
   </div>
 
-
+@if (ShowModel) 
+{
     <div class="modal-overlay">
       <div class="modal-card">
         <div class="modal-header">
-
+          @if (paymentform.id != 0) 
+          {
+            <h3>Edit Payment Member</h3>
+          }
+          @else {
             <h3>Add Payment Member</h3>
-
-          <span class="close-x" >&times;</span>
+          }
+            
+          <span class="close-x" (click)="ToggleModel(false)">&times;</span>
         </div>
 
-        <form class="member-form" >
+        <form class="member-form" >          
           <div class="f-group">
-            <label>Plan Code</label>
-            <input type="hidden"  id="id" name="id">
-            <input type="text"  id="Code" name="code" placeholder="Enter Code">
+            <label>Member Name</label>
+              <select [(ngModel)] = "paymentform.memberId" name="memeberId">
+              <option value="0" disabled>select Member</option>
+              @for (item of memberRecord; track item.id) {
+                <option [value]="item.id">{{item.name}}</option>
+              }
+            </select>
           </div>
           <div class="f-group">
-            <label>Plan Name</label>
-            <input type="text"  name="name" placeholder="Enter Plan Name">
-          </div>
-          <div class="f-group">
-            <label>Duration</label>
-           <input type="text"  name="duration" placeholder="Enter Duration">
+            <label>Payment Type</label>
+           <select [(ngModel)] ="paymentform.paymentType" name="paymentType" >
+            <option value="0" disabled>select Payment Type</option>
+            @for (item of paymentTypes; track $index) {
+            <option [value]="item.value">{{item.display}}</option>
+            }
+           </select>
           </div>
           <div class="f-group">
             <label>Amount</label>
-            <input type="number"  name="amount" >
+            <input type="number" [(ngModel)] = "paymentform.amount"  name="amount" >
           </div>
-          
+          <div class="f-group">
+            <label>Payment Status</label>
+            <select [(ngModel)] ="paymentform.paymentStatus" name="paymentStatus" >
+            <option value="0" disabled>select Payment Status</option>
+            @for (item of paymentstatus; track $index) {
+            <option [value]="item.value">{{item.display}}</option>
+            }
+           </select>
+          </div>
           <div class="modal-footer">
-
-       
-            <button type="button" class="btn-save" >Save Payment</button>
-
-            <button type="button" class="btn-cancel" >Cancel</button>
+            @if(paymentform.id!=0)
+            {
+              <button type="button" class="btn-save" (click)="UpdateRecord()">Edit Payment</button>
+            }
+            @else {
+              <button type="button" class="btn-save" (click)="AddRecord()">Save Payment</button>
+            }
+            
+            <button type="button" class="btn-cancel" (click)="ToggleModel(false)">Cancel</button>
           </div>
         </form>
       </div>
     </div>
-
+}
 </div>
