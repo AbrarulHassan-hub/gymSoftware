@@ -26,13 +26,13 @@ namespace gymsoftware.Controllers
             await attendence.SaveAttendence(attendenceObj);
             return Ok(attendenceObj);
         }
-        [HttpPut()]
-        public async Task<ActionResult> UpdateAttendence(int id, Attendence attendenceObj)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateAttendence(int id, [FromBody] Attendence attendenceObj)
         {
             await attendence.UpdateAttendence(id, attendenceObj);
             return Ok(attendenceObj);
         }
-        [HttpDelete()]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAttendence(int id)
         {
             await attendence.DeleteAttendence(id);

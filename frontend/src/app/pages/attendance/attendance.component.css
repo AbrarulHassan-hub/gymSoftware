@@ -226,7 +226,6 @@ input[type="checkbox"] {
   width: 450px;
   border-radius: 12px;
   padding: 25px;
-  margin-top: 423px;
   border: 1px solid #333;
 }
 
@@ -313,4 +312,26 @@ input[type="checkbox"] {
 .btn-delete:hover {
   background-color: var( --red);   
   transform: translateY(-1px);
+}
+/* ------------------ */
+.badge-present {
+  background-color: #1a3a2a;
+  color: #4caf82;
+  border: 1px solid #2d6a4a;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge-absent {
+  background-color: #3a1a1a;
+  color: #e05555;
+  border: 1px solid #6a2d2d;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
 }

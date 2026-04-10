@@ -16,102 +16,105 @@
       <thead>
         <tr>
           <th>Member Name</th>
-          <th>Amount</th>
-          <th>Payment Type</th>
-          <th>Payment Status</th>
+          <th>Attendance</th>
+          <th>Date</th>
           <th>Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr>
-          <td style="color: #ffffff;">Ali Khan</td>
-          <td style="color: #ffffff;">5000</td>
-          <td style="color: #ffffff;">Cash</td>
-          <td style="color: #ffffff;">Paid</td>
-          <td>
-            <div class="action-menu">
-              <button class="btn-edit">Edit</button>
-              <button class="btn-delete">Delete</button>
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td style="color: #ffffff;">Ahmed Raza</td>
-          <td style="color: #ffffff;">3000</td>
-          <td style="color: #ffffff;">Online</td>
-          <td style="color: #ffffff;">Pending</td>
-          <td>
-            <div class="action-menu">
-              <button class="btn-edit">Edit</button>
-              <button class="btn-delete">Delete</button>
-            </div>
-          </td>
-        </tr>
-
-        <!-- Empty State Example -->
-        <!--
-        <tr>
-          <td colspan="5" style="text-align: center; color: #888; padding: 20px;">
-            No Record Found
-          </td>
-        </tr>
-        -->
+        @for (m of Attend; track m.id) {
+          <tr>
+            <td style="color: #ffffff;">{{ getPlanName(m.memberId) }}</td>
+            <td>
+              <!-- ✅ ngClass with class name string -->
+              <span [ngClass]="m.attendences == 'Present' ? 'badge-present' : 'badge-absent'">
+                {{ m.attendences }}
+              </span>
+            </td>
+            <td style="color: #ffffff;">{{ m.date | date:'dd MMMM yyyy'}}</td>
+            <td>
+              <div class="action-menu">
+                <button class="btn-edit" (click)="EditAttendence(m)">Edit</button>
+                <button class="btn-delete" (click)="DeleteAttendence(m.id)">Delete</button>
+              </div>
+            </td>
+          </tr>
+        }
+           @empty {
+    <tr>
+      <td colspan="5" style="text-align: center; color: #888; padding: 20px;">
+        No Record Found
+      </td>
+    </tr>
+  }
       </tbody>
     </table>
   </div>
-@if (showModel) {
-  <!-- Modal -->
-  <div class="modal-overlay">
-    <div class="modal-card">
-      
-      <div class="modal-header">
-        <h3>Add Attendance</h3>
-        <span class="close-x" (click)="ToggleModel(false)">&times;</span>
+
+  @if (showModel) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+
+        <div class="modal-header">
+         @if (Attendence.id != 0)
+             {
+              <h3>Update Attendance</h3>
+             }
+             @else
+            {
+              <h3>Add Attendance</h3>
+             }
+          <span class="close-x" (click)="ToggleModel(false)">&times;</span>
+        </div>
+
+        <form class="member-form" >
+
+          <div class="f-group">
+           
+            <label>Member Name</label>
+            <select [(ngModel)]="Attendence.memberId" name="MemberId">
+              <option disabled selected>Select Member</option>
+              @for (item of Member; track item.id)
+              {
+                 <option value="{{item.id}}">{{item.name}}</option>
+              } 
+            </select>
+          </div>
+
+          <div class="f-group">
+            <label>Attendence</label>
+            <select [(ngModel)]="Attendence.attendences" name="Attendence">
+              <option disabled selected>Select Attendence</option>
+              @for (item of attendence; track item.Id) 
+              {
+                <option value="{{item.value}}">{{item.display}}</option>
+              }
+            </select>
+          </div>
+
+          <div class="f-group">
+            <label>Date</label>
+            <input type="date" [(ngModel)]="Attendence.date " name="Date" />
+          </div>
+
+
+          <div class="modal-footer">
+            @if (Attendence.id != 0)
+             {
+              <button type="button" class="btn-save" (click)="UpdateAttendence()">Update Attendence</button>
+             }
+             @else 
+             {
+                <button type="button" class="btn-save" (click)="SavePayment()">Save Payment</button>
+
+             }
+            <button type="button" class="btn-cancel" (click)="ToggleModel(false)">Cancel</button>
+          </div>
+
+        </form>
       </div>
-
-      <form class="member-form">
-
-        <div class="f-group">
-          <label>Member Name</label>
-          <select>
-            <option disabled selected>Select Member</option>
-            <option>Ali Khan</option>
-            <option>Ahmed Raza</option>
-          </select>
-        </div>
-
-        <div class="f-group">
-          <label>Payment Type</label>
-          <select>
-            <option disabled selected>Select Payment Type</option>
-            <option>Cash</option>
-            <option>Online</option>
-          </select>
-        </div>
-
-        <div class="f-group">
-          <label>Amount</label>
-          <input type="number" />
-        </div>
-
-        <div class="f-group">
-          <label>Payment Status</label>
-          <select>
-            <option disabled selected>Select Payment Status</option>
-            <option>Paid</option>
-            <option>Pending</option>
-          </select>
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn-save">Save Payment</button>
-          <button type="button" class="btn-cancel" (click)="ToggleModel(false)">Cancel</button>
-        </div>
-
-      </form>
     </div>
-  </div>
-}
+  }
+
 </div>
