@@ -12,7 +12,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  counts = { countMembership: 0, countMembers: 0, countPayments: 0 };
+  counts = { countMembership: 0, countMembers: 0, countPayments: 0,countAttendence:0 };
 
   http = inject(HttpClient);
 
@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     this.countMembership();
     this.countMembers();
     this.countPayments();
+    this.countPresentTodayAttendence();
   }
 
   countMembership() {
@@ -46,6 +47,15 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+  countPresentTodayAttendence()
+  {
+    this.http.get<number>("https://localhost:7233/api/Attendence/todayattendence").subscribe({
+      next:(res)=>{
+        this.counts.countAttendence = res;
+        console.log("present today attendence:",this.counts.countAttendence);
+      }
+    })
+  }
 
   // ✅ getter bana diya — har baar fresh value lega
   get stats() {
@@ -53,7 +63,7 @@ export class HomeComponent implements OnInit {
       { label: 'Total Members',      value: this.counts.countMembers,    delta: '↑ 12', sub: 'this month',      color: 'yellow', icon: '👥' },
       { label: 'Active Memberships', value: this.counts.countMembership, delta: '↑ 8',  sub: 'vs last week',    color: 'green',  icon: '✅' },
       { label: 'Payments Due',       value: this.counts.countPayments,   delta: '↑ 5',  sub: 'overdue >7 days', color: 'red',    icon: '💳' },
-      { label: "Today's Attendance", value: 67,                          delta: '↑ 11', sub: 'vs yesterday',    color: 'blue',   icon: '🏋'  }
+      { label: "Today's Attendance", value: this.counts.countAttendence,  delta: '↑ 11', sub: 'vs yesterday',    color: 'blue',   icon: '🏋'  }
     ];
   }
 

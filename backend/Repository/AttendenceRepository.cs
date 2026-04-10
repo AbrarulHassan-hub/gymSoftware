@@ -48,5 +48,15 @@ namespace gymsoftware.Repository
                 await db.SaveChangesAsync();
             }
         }
+        public async Task<int> TotalAttendence()
+        {
+            var today = DateTime.Today;
+
+            return await db.Attendences
+                .Where(a => a.Date >= today
+                         && a.Date < today.AddDays(1)
+                         && a.Attendences == "Present")
+                .CountAsync();
+        }
     }
 }

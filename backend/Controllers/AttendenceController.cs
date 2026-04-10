@@ -38,6 +38,12 @@ namespace gymsoftware.Controllers
             await attendence.DeleteAttendence(id);
             return Ok(attendence);
         }
+        [HttpGet("todayattendence")]
+        public async Task<ActionResult> CountTodayAttendence()
+        {
+            var total = await attendence.TotalAttendence();
+            return Ok(total);
+        }
 
     }
 }
