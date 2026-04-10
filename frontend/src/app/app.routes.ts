@@ -5,6 +5,7 @@ import { MemberrComponent } from './pages/memberr/memberr.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MembershipComponent } from './pages/membership/membership.component';
 import { PaymentComponent } from './pages/payment/payment.component';
+import { AttendanceComponent } from './pages/attendance/attendance.component';
 
 export const routes: Routes = [
     {
@@ -40,6 +41,10 @@ export const routes: Routes = [
             {
                 path: 'payments',
                 component: PaymentComponent
+            },
+            {
+                path: 'attendance',
+                component: AttendanceComponent
             }
         ]
     }

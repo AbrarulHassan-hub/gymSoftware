@@ -21,6 +21,7 @@ builder.Services.AddScoped<LoginRepository>();
 builder.Services.AddScoped<membershipRespository>();
 builder.Services.AddScoped<membersRepository>();
 builder.Services.AddScoped<PaymentRepository>();
+builder.Services.AddScoped<AttendenceRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

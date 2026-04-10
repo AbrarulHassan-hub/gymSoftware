@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gymsoftware.Data;
 
@@ -11,9 +12,11 @@ using gymsoftware.Data;
 namespace gymsoftware.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260410053307_newTableAttedenceAdded")]
+    partial class newTableAttedenceAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,8 +43,6 @@ namespace gymsoftware.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MemberId");
 
                     b.ToTable("Attendences");
                 });
@@ -150,17 +151,6 @@ namespace gymsoftware.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Membership");
-                });
-
-            modelBuilder.Entity("gymsoftware.Model.Attendence", b =>
-                {
-                    b.HasOne("gymsoftware.Model.members", "MemberName")
-                        .WithMany()
-                        .HasForeignKey("MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MemberName");
                 });
 
             modelBuilder.Entity("gymsoftware.Model.Payment", b =>

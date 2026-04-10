@@ -1,0 +1,117 @@
+<div class="member-directory">
+
+  <div class="dir-header">
+    <h2 class="dir-title">Member Payment</h2>
+    <div class="dir-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search members..." />
+      </div>
+      <button class="btn-add" (click)="AddModelShow()">＋ Add Attendance</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Member Name</th>
+          <th>Amount</th>
+          <th>Payment Type</th>
+          <th>Payment Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td style="color: #ffffff;">Ali Khan</td>
+          <td style="color: #ffffff;">5000</td>
+          <td style="color: #ffffff;">Cash</td>
+          <td style="color: #ffffff;">Paid</td>
+          <td>
+            <div class="action-menu">
+              <button class="btn-edit">Edit</button>
+              <button class="btn-delete">Delete</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="color: #ffffff;">Ahmed Raza</td>
+          <td style="color: #ffffff;">3000</td>
+          <td style="color: #ffffff;">Online</td>
+          <td style="color: #ffffff;">Pending</td>
+          <td>
+            <div class="action-menu">
+              <button class="btn-edit">Edit</button>
+              <button class="btn-delete">Delete</button>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Empty State Example -->
+        <!--
+        <tr>
+          <td colspan="5" style="text-align: center; color: #888; padding: 20px;">
+            No Record Found
+          </td>
+        </tr>
+        -->
+      </tbody>
+    </table>
+  </div>
+@if (showModel) {
+  <!-- Modal -->
+  <div class="modal-overlay">
+    <div class="modal-card">
+      
+      <div class="modal-header">
+        <h3>Add Attendance</h3>
+        <span class="close-x" (click)="ToggleModel(false)">&times;</span>
+      </div>
+
+      <form class="member-form">
+
+        <div class="f-group">
+          <label>Member Name</label>
+          <select>
+            <option disabled selected>Select Member</option>
+            <option>Ali Khan</option>
+            <option>Ahmed Raza</option>
+          </select>
+        </div>
+
+        <div class="f-group">
+          <label>Payment Type</label>
+          <select>
+            <option disabled selected>Select Payment Type</option>
+            <option>Cash</option>
+            <option>Online</option>
+          </select>
+        </div>
+
+        <div class="f-group">
+          <label>Amount</label>
+          <input type="number" />
+        </div>
+
+        <div class="f-group">
+          <label>Payment Status</label>
+          <select>
+            <option disabled selected>Select Payment Status</option>
+            <option>Paid</option>
+            <option>Pending</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-save">Save Payment</button>
+          <button type="button" class="btn-cancel" (click)="ToggleModel(false)">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+}
+</div>
