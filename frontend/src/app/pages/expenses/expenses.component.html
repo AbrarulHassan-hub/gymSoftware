@@ -1,1 +1,123 @@
-<p>expenses works!</p>
+<div class="member-directory">
+
+  <div class="dir-header">
+    <h2 class="dir-title">EXPENSES</h2>
+    <div class="dir-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search Expenses..." />
+      </div>
+      <button class="btn-add" (click)="AddModelClear()">＋ Add Expense</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Member Name</th>
+          <th>Amount</th>
+          <th>Expenses Type</th>
+          <th>Expenses Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Sample Row -->
+        <tr>
+          <td style="color: #ffffff;">Ali Khan</td>
+          <td style="color: #ffffff;">
+            <div class="member-cell">
+              <span>5000</span>
+            </div>
+          </td>
+          <td style="color: #ffffff;">Cash</td>
+          <td style="color: #ffffff;">Paid</td>
+          <td>
+            <div class="action-menu">
+              <button class="btn-edit">Edit</button>
+              <button class="btn-delete">Delete</button>
+            </div>
+          </td>
+        </tr>
+
+        <!-- No Record Row -->
+        <!--
+        <tr>
+          <td colspan="5" style="text-align: center; color: #888; padding: 20px;">
+            No Record Found
+          </td>
+        </tr>
+        -->
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+   @if(ShowModel){
+  <div class="modal-overlay">
+    <div class="modal-card">
+      
+      <div class="modal-header">
+        <h3>Add Expenses Member</h3>
+        <span class="close-x" (click)="ToggleModel(false)">&times;</span>
+      </div>
+
+      <form class="member-form">
+
+        <div class="f-group">
+          <label>Expenses Title</label>
+          <input type="text" name="ExpensesTitle">
+        </div>
+
+        <div class="f-group">
+          <label>CATEGORY</label>
+          <select name="paymentType">
+            <option value="0" disabled selected>Select Category</option>
+            <option value="Cash">Rent</option>
+            <option value="Card">Salary</option>
+          </select>
+        </div>
+
+        <div class="f-group">
+          <label>DATE</label>
+          <input type="date" name="date">
+        </div>
+
+        <div class="f-group">
+          <label>AMOUNT</label>
+          <input type="number" name="amount">
+        </div>
+
+        <div class="f-group">
+          <label>PAYMENT METHOD</label>
+          <select name="paymentStatus">
+            <option value="0" disabled selected>Select Expenses Status</option>
+            <option value="Paid">Jazz Cash</option>
+            <option value="Pending">Easy Paisa</option>
+          </select>
+        </div>
+                <div class="f-group">
+  <label>Status</label>
+  <div class="tab-group">
+    <button type="button" class="tab-opt active-paid"
+      data-val="Jazz Cash" (click)="selectTab($event, 'active-paid')">Paid</button>
+    <button type="button" class="tab-opt"
+      data-val="Easy Paisa" (click)="selectTab($event, 'active-pending')">Pending</button>
+    <button type="button" class="tab-opt"
+      data-val="Cash" (click)="selectTab($event, 'active-due')">Due</button>
+  </div>
+  <input type="hidden" name="paymentMethod" id="paymentMethodVal" value="Jazz Cash" />
+</div>
+        <div class="modal-footer">
+          <button type="button" class="btn-save">Save Expenses</button>
+          <button type="button" class="btn-cancel" (click)="ToggleModel(false)">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+}
+</div>

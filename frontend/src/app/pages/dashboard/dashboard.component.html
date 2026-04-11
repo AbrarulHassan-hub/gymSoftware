@@ -29,6 +29,9 @@
 
       <div class="nav-group">
         <div class="nav-label">MORE</div>
+        <a class="nav-item" [class.active]="activeNav === 'reports'" (click)="navigateTo('expenses')">
+          <span class="icon">💸</span> Expenses
+        </a>
         <a class="nav-item" [class.active]="activeNav === 'reports'" (click)="navigateTo('reports')">
           <span class="icon">📊</span> Reports
         </a>

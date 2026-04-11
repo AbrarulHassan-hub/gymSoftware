@@ -31,7 +31,8 @@ export class DashboardComponent {
       attendance: 'Attendance',
       reports: 'Reports',
       classes: 'Classes',
-      settings: 'Settings'
+      settings: 'Settings',
+      expenses: 'Expenses'
     };
     this.pagetitle = titles[page] || 'Dashboard';
     this.router.navigate(['dashboard', page]);
