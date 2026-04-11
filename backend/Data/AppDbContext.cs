@@ -14,5 +14,6 @@ namespace gymsoftware.Data
         public DbSet<members> Members { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Attendence> Attendences { get; set; }
+        public DbSet<Expenses> Expenses { get; set; }
     }
 }
