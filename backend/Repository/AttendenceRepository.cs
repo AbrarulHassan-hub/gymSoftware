@@ -51,12 +51,8 @@ namespace gymsoftware.Repository
         public async Task<int> TotalAttendence()
         {
             var today = DateTime.Today;
-
-            return await db.Attendences
-                .Where(a => a.Date >= today
-                         && a.Date < today.AddDays(1)
-                         && a.Attendences == "Present")
-                .CountAsync();
+            return await db.Attendences.Where(d => d.Date == today && d.Attendences == "Present").CountAsync();
+        
         }
     }
 }

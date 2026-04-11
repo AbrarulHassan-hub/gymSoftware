@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
+  constructor(private router: Router) {}
   counts = { countMembership: 0, countMembers: 0, countPayments: 0,countAttendence:0 };
 
   http = inject(HttpClient);
@@ -56,6 +58,9 @@ export class HomeComponent implements OnInit {
       }
     })
   }
+ NewMemberAdd() {
+  this.router.navigate(['/dashboard/members']);
+}
 
   // ✅ getter bana diya — har baar fresh value lega
   get stats() {
