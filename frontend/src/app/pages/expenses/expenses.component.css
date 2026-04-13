@@ -106,11 +106,13 @@ table {
 }
 
 /* Column widths fix karo */
-thead th:nth-child(1) { width: 20%; }   /* Plan Code */
-thead th:nth-child(2) { width: 25%; }   /* Plan Name */
-thead th:nth-child(3) { width: 20%; }   /* Duration */
-thead th:nth-child(4) { width: 15%; }   /* Amount */
-thead th:nth-child(5) { width: 20%; }   /* Actions */
+thead th:nth-child(1) { width: 18%; }   /* Expense Title */
+thead th:nth-child(2) { width: 15%; }   /* Category */
+thead th:nth-child(3) { width: 14%; }   /* Date */
+thead th:nth-child(4) { width: 12%; }   /* Amount */
+thead th:nth-child(5) { width: 14%; }   /* Payment Method */
+thead th:nth-child(6) { width: 12%; }   /* Status */
+thead th:nth-child(7) { width: 15%; }   /* Actions */
 
 thead tr {
   border-bottom: 1px solid var(--border);
@@ -226,7 +228,7 @@ input[type="checkbox"] {
   width: 450px;
   border-radius: 12px;
   padding: 25px;
-  margin-top: 423px;
+  margin-top: 200px;
   border: 1px solid #333;
 }
 
@@ -353,7 +355,36 @@ input[type="checkbox"] {
 }
 
 .tab-opt.active-due {
-  background: rgba(77, 159, 255, 0.1);
-  color: #4d9fff;
+ background-color: #3d0000;
+  color: #f44336;
   border-color: rgba(77, 159, 255, 0.3);
+}
+/* Paid - Green */
+.badge-paid {
+  background-color: #1a472a;
+  color: #4caf50;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Pending - Yellow */
+.badge-pending {
+  background-color: #3d3000;
+  color: #ffc107;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Due - Red */
+.badge-due {
+  background-color: #3d0000;
+  color: #f44336;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
 }

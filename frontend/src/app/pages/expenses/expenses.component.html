@@ -1,7 +1,7 @@
 <div class="member-directory">
 
   <div class="dir-header">
-    <h2 class="dir-title">EXPENSES</h2>
+    <h2 class="dir-title">EXPENSE MANAGEMENT</h2>
     <div class="dir-actions">
       <div class="search-box">
         <span class="search-icon">🔍</span>
@@ -15,53 +15,58 @@
     <table>
       <thead>
         <tr>
-          <th>Member Name</th>
+          <th>Expense Title</th>
+          <th>Category</th>
+          <th>Date</th>
           <th>Amount</th>
-          <th>Expenses Type</th>
-          <th>Expenses Status</th>
+          <th>Payment Method</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-
-        <!-- Sample Row -->
+        @for (item of expenseRecord; track item.id) {
         <tr>
-          <td style="color: #ffffff;">Ali Khan</td>
-          <td style="color: #ffffff;">
-            <div class="member-cell">
-              <span>5000</span>
-            </div>
+          <td style="color: #ffffff;">{{item.expensesTitle}}</td>
+          <td style="color: #ffffff;">{{ categoryMap[item.category] || 'N/A' }}</td>
+          <td style="color: #ffffff;">{{item.date | date: 'dd-MM-yyyy'}}</td>
+          <td style="color: #ffffff;">{{item.amount}}</td>
+          <td style="color: #ffffff;">{{item.paymentMethod}}</td>
+          <td>
+          <span [ngClass]="statusClassMap[+item.status]">
+  {{ statusMap[+item.status] || 'N/A' }}
+</span>
           </td>
-          <td style="color: #ffffff;">Cash</td>
-          <td style="color: #ffffff;">Paid</td>
           <td>
             <div class="action-menu">
-              <button class="btn-edit">Edit</button>
-              <button class="btn-delete">Delete</button>
+              <button class="btn-edit" (click)="EditExpenses(item)">Edit</button>
+              <button class="btn-delete" (click)="DeleteExpenses(item.id)">Delete</button>
             </div>
           </td>
         </tr>
-
-        <!-- No Record Row -->
-        <!--
+        }
+        @empty {
         <tr>
-          <td colspan="5" style="text-align: center; color: #888; padding: 20px;">
+          <td colspan="7" style="text-align: center; color: #888; padding: 20px;">
             No Record Found
           </td>
         </tr>
-        -->
-
+        }
       </tbody>
     </table>
   </div>
 
   <!-- Modal -->
-   @if(ShowModel){
+  @if(ShowModel) {
   <div class="modal-overlay">
     <div class="modal-card">
-      
+
       <div class="modal-header">
-        <h3>Add Expenses Member</h3>
+        @if (Expenses.id) {
+          <h3>Edit Expense</h3>
+        } @else {
+          <h3>Add Expense</h3>
+        }
         <span class="close-x" (click)="ToggleModel(false)">&times;</span>
       </div>
 
@@ -69,55 +74,72 @@
 
         <div class="f-group">
           <label>Expenses Title</label>
-          <input type="text" name="ExpensesTitle">
+          <input type="text" [(ngModel)]="Expenses.expensesTitle" name="ExpensesTitle">
         </div>
 
         <div class="f-group">
           <label>CATEGORY</label>
-          <select name="paymentType">
+          <select [(ngModel)]="Expenses.category" name="category">
             <option value="0" disabled selected>Select Category</option>
-            <option value="Cash">Rent</option>
-            <option value="Card">Salary</option>
+            <option value="1">🏋️ Equipment Purchase</option>
+            <option value="2">🔧 Equipment Repair</option>
+            <option value="3">💡 Electricity Bill</option>
+            <option value="4">💧 Water Bill</option>
+            <option value="5">🌐 Internet & WiFi</option>
+            <option value="6">🧹 Cleaning Supplies</option>
+            <option value="7">🏠 Rent</option>
           </select>
         </div>
 
         <div class="f-group">
           <label>DATE</label>
-          <input type="date" name="date">
+          <input [(ngModel)]="Expenses.date" type="date" name="date">
         </div>
 
         <div class="f-group">
           <label>AMOUNT</label>
-          <input type="number" name="amount">
+          <input [(ngModel)]="Expenses.amount" type="number" name="amount">
         </div>
 
         <div class="f-group">
           <label>PAYMENT METHOD</label>
-          <select name="paymentStatus">
-            <option value="0" disabled selected>Select Expenses Status</option>
-            <option value="Paid">Jazz Cash</option>
-            <option value="Pending">Easy Paisa</option>
+          <select [(ngModel)]="Expenses.paymentMethod" name="paymentMethod">
+            <option value="" disabled selected>Select Payment Method</option>
+            <option value="EasyPaisa">📱 EasyPaisa</option>
+            <option value="JazzCash">📱 JazzCash</option>
+            <option value="Bank Transfer (TT)">🏦 Bank Transfer (TT)</option>
+            <option value="Cash">💵 Cash</option>
+            <option value="Other">🔘 Other</option>
           </select>
         </div>
-                <div class="f-group">
-  <label>Status</label>
-  <div class="tab-group">
-    <button type="button" class="tab-opt active-paid"
-      data-val="Jazz Cash" (click)="selectTab($event, 'active-paid')">Paid</button>
-    <button type="button" class="tab-opt"
-      data-val="Easy Paisa" (click)="selectTab($event, 'active-pending')">Pending</button>
-    <button type="button" class="tab-opt"
-      data-val="Cash" (click)="selectTab($event, 'active-due')">Due</button>
-  </div>
-  <input type="hidden" name="paymentMethod" id="paymentMethodVal" value="Jazz Cash" />
-</div>
+
+        <div class="f-group">
+          <label>STATUS</label>
+          <div class="tab-group">
+            <button type="button" class="tab-opt"
+              [class.active-paid]="selectedTab === 1"
+              (click)="selectTab($event, 'active-paid', 1)">Paid</button>
+            <button type="button" class="tab-opt"
+              [class.active-pending]="selectedTab === 2"
+              (click)="selectTab($event, 'active-pending', 2)">Pending</button>
+            <button type="button" class="tab-opt"
+              [class.active-due]="selectedTab === 3"
+              (click)="selectTab($event, 'active-due', 3)">Due</button>
+          </div>
+        </div>
+
         <div class="modal-footer">
-          <button type="button" class="btn-save">Save Expenses</button>
+          @if (Expenses.id) {
+            <button type="button" class="btn-save" (click)="UpdateRecord()">Update Expenses</button>
+          } @else {
+            <button type="button" class="btn-save" (click)="SaveRecord()">Save Expenses</button>
+          }
           <button type="button" class="btn-cancel" (click)="ToggleModel(false)">Cancel</button>
         </div>
 
       </form>
     </div>
   </div>
-}
+  }
+
 </div>
