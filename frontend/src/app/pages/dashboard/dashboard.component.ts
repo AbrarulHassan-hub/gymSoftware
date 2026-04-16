@@ -29,7 +29,6 @@ export class DashboardComponent {
       members: 'Members',
       payments: 'Payments',
       attendance: 'Attendance',
-      reports: 'Reports',
       classes: 'Classes',
       settings: 'Settings',
       expenses: 'Expenses',

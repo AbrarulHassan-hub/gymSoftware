@@ -25,19 +25,17 @@
         <a class="nav-item" [class.active]="activeNav === 'attendance'" (click)="navigateTo('attendance')">
           <span class="icon">✓</span> Attendance
         </a>
+        <a class="nav-item" [class.active]="activeNav === 'reports'" (click)="navigateTo('expenses')">
+          <span class="icon">💸</span> Expenses
+        </a>
       </div>
 
       <div class="nav-group">
         <div class="nav-label">MORE</div>
-        <a class="nav-item" [class.active]="activeNav === 'reports'" (click)="navigateTo('expenses')">
-          <span class="icon">💸</span> Expenses
-        </a>
-        <a class="nav-item" [class.active]="activeNav === 'reports'" (click)="navigateTo('reports')">
-          <span class="icon">📊</span> Reports
-        </a>
-        <a class="nav-item" [class.active]="activeNav === 'classes'" (click)="navigateTo('classes')">
+        
+        <!-- <a class="nav-item" [class.active]="activeNav === 'classes'" (click)="navigateTo('classes')">
           <span class="icon">🏋</span> Classes
-        </a>
+        </a> -->
         <a class="nav-item" [class.active]="activeNav === 'settings'" (click)="navigateTo('settings')">
           <span class="icon">⚙</span> Settings
         </a>

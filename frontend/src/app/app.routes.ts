@@ -7,7 +7,7 @@ import { MembershipComponent } from './pages/membership/membership.component';
 import { PaymentComponent } from './pages/payment/payment.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
-import { ReportComponent } from './pages/report/report.component';
+import { SettingComponent } from './pages/setting/setting.component';
 
 export const routes: Routes = [
     {
@@ -52,9 +52,9 @@ export const routes: Routes = [
                 path: 'expenses',
                 component: ExpensesComponent
             },
-              {
-                path: 'reports',
-                component: ReportComponent
+            {
+                path: 'settings',
+                component: SettingComponent
             }
         ]
     }
