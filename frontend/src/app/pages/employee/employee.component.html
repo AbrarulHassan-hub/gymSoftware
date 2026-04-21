@@ -31,10 +31,10 @@
           <span>{{ m.empCode }}</span>
         </div>
       </td>
-      <td class="muted" style="color: #ffffff;">{{ m.phoneNo }}</td>
-      <td class="muted" style="color: #ffffff;">{{ m.empName }}</td>
-      <td class="muted" style="color: #ffffff;">{{ m.empNIC }}</td>
-      <td class="muted" style="color: #ffffff;">{{ m.empAdress }}</td>
+<td style="color: #ffffff;">{{ m.phoneNo }}</td>
+<td style="color: #ffffff;">{{ m.empName }}</td>
+<td style="color: #ffffff;">{{ m.empNIC }}</td>
+<td style="color: #ffffff;">{{ m.empAdress }}</td>
       <td>
         <div class="action-menu">
           <button class="btn-edit" (click)="editmember(m)">Edit</button>
@@ -52,10 +52,10 @@
       <div class="modal-card">
         <div class="modal-header">
             @if (employeeData.id != 0) { 
-            <h3>EDIT MEMBER</h3>
+            <h3>EDIT EMPLOYEE</h3>
             }
           @else {
-            <h3>ADD NEW MEMBER</h3>
+            <h3>ADD Employee</h3>
           }
           <span class="close-x" (click)="ToggleModel(false)" >&times;</span>
         </div>
