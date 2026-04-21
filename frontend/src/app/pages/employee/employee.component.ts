@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component,inject,OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Console } from 'console';
 interface Employee {
   id: number;
   empCode: number;
@@ -8,6 +9,7 @@ interface Employee {
   empName: string;
   empNIC: string;
   empAdress: string;
+  status: boolean;
 }
 
 @Component({
@@ -27,7 +29,8 @@ export class EmployeeComponent implements OnInit {
     empName: '',
     phoneNo: '',
     empNIC: '',
-    empAdress: ''
+    empAdress: '',
+    status: false
   }
   ngOnInit(): void {
     this.getEmployeeRecord();
@@ -43,7 +46,8 @@ export class EmployeeComponent implements OnInit {
       empName: '',
       phoneNo: '',
       empNIC: '',
-      empAdress: ''
+      empAdress: '',
+      status: false
     };
     this.ToggleModel(true);
   }
@@ -52,6 +56,7 @@ export class EmployeeComponent implements OnInit {
     this.http.get<Employee[]>('https://localhost:7233/api/Employee').subscribe(
       (response) => {
         this.employees = response;
+        console.log('Employee record updated successfully:', this.employees);
       },
       (error) => {
         console.error('Error fetching employee records:', error);
@@ -72,19 +77,25 @@ export class EmployeeComponent implements OnInit {
       }
     );
   }
-  UpdateRecordEmp()
-  {
-    this.http.put(`https://localhost:7233/api/Employee/${this.employeeData.id}`, this.employeeData).subscribe(
-      (response) => {
-        console.log('Employee record updated successfully:', response);
-        this.getEmployeeRecord();
-        this.ToggleModel(false);
-      },
-      (error) => {
-        console.error('Error updating employee record:', error);
-      }
-    ); 
-  }
+UpdateRecordEmp() {
+  const payload = {
+    ...this.employeeData,
+    empCode: Number(this.employeeData.empCode),
+    status: this.employeeData.status === true || (this.employeeData.status as any) === 'true'
+  };
+
+  this.http.put(`https://localhost:7233/api/Employee/${payload.id}`, payload).subscribe(
+    (response) => {
+      console.log('Employee record updated successfully:', response);
+      this.getEmployeeRecord();
+      this.ToggleModel(false);
+    },
+    (error) => {
+      console.error('Error updating employee record:', error);
+      alert('Error updating: ' + JSON.stringify(error.error));
+    }
+  );
+}
   DeleteRecord(id: number)
   {
     this.http.delete(`https://localhost:7233/api/Employee/${id}`).subscribe(  

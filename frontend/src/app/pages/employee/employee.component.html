@@ -20,6 +20,7 @@
           <th>Name</th>
           <th>NIC #</th>
           <th>Address</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -35,6 +36,7 @@
 <td style="color: #ffffff;">{{ m.empName }}</td>
 <td style="color: #ffffff;">{{ m.empNIC }}</td>
 <td style="color: #ffffff;">{{ m.empAdress }}</td>
+<td style="color: #ffffff;">{{ m.status ? 'Active' : 'Inactive' }}</td>
       <td>
         <div class="action-menu">
           <button class="btn-edit" (click)="editmember(m)">Edit</button>
@@ -80,6 +82,14 @@
           <div class="f-group">
             <label>Address</label>
             <input type="text" [(ngModel)]="employeeData.empAdress" name="Address" placeholder="Enter Address">
+          </div>
+           <div class="f-group">
+            <label>Status</label>
+            <select [(ngModel)] = "employeeData.status" name="Status">
+              <option value="0" disabled>select Status</option>
+              <option value="true">Active</option>
+              <option value="false">InActive</option>
+            </select>
           </div>
              
            <div class="modal-footer">

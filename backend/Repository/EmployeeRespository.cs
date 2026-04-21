@@ -34,6 +34,7 @@ namespace gymsoftware.Repository
                 Employee.EmpName = emp.EmpName;
                 Employee.EmpNIC = emp.EmpNIC;
                 Employee.EmpAdress = emp.EmpAdress;
+                Employee.status = emp.status;
                 await db.SaveChangesAsync();
             }
         }
