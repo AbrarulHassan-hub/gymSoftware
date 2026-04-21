@@ -1,0 +1,101 @@
+<div class="employee-directory">
+
+  <div class="dir-header">
+    <h2 class="dir-title">Employee Directory</h2>
+    <div class="dir-actions">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search employees..." />
+      </div>
+      <button class="btn-add" (click) = "ResetModel()">＋ Add Employee</button>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Phone #</th>
+          <th>Name</th>
+          <th>NIC #</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      @for (m of employees; track m.id) {
+    <tr>
+      <td>
+        <div class="member-cell">
+          <span>{{ m.empCode }}</span>
+        </div>
+      </td>
+      <td class="muted" style="color: #ffffff;">{{ m.phoneNo }}</td>
+      <td class="muted" style="color: #ffffff;">{{ m.empName }}</td>
+      <td class="muted" style="color: #ffffff;">{{ m.empNIC }}</td>
+      <td class="muted" style="color: #ffffff;">{{ m.empAdress }}</td>
+      <td>
+        <div class="action-menu">
+          <button class="btn-edit" (click)="editmember(m)">Edit</button>
+          <button class="btn-delete" (click)="DeleteRecord(m.id)">Delete</button>
+        </div>
+      </td>
+    </tr>
+  }
+</tbody>
+    </table>
+  </div>
+
+  @if (ShowModel) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-header">
+            @if (employeeData.id != 0) { 
+            <h3>EDIT MEMBER</h3>
+            }
+          @else {
+            <h3>ADD NEW MEMBER</h3>
+          }
+          <span class="close-x" (click)="ToggleModel(false)" >&times;</span>
+        </div>
+
+        <form class="member-form" (submit)="$event.preventDefault()">
+          <div class="f-group">
+            <label>Code</label>
+            <input type="text" [(ngModel)]="employeeData.empCode" name="Code" placeholder="Enter Code">
+          </div>
+          <div class="f-group">
+            <label>Phone No</label>
+            <input type="text" [(ngModel)]="employeeData.phoneNo" name="PhoneNo" placeholder="Enter Phone Number">
+          </div>
+          <div class="f-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="employeeData.empName" name="Name" placeholder="Enter Name">
+          </div>
+          <div class="f-group">
+            <label>NIC #</label>
+            <input type="text" [(ngModel)]="employeeData.empNIC" name="NIC" placeholder="Enter Nic Number">
+          </div>
+          <div class="f-group">
+            <label>Address</label>
+            <input type="text" [(ngModel)]="employeeData.empAdress" name="Address" placeholder="Enter Address">
+          </div>
+             
+           <div class="modal-footer">
+        
+            @if (employeeData.id != 0)
+             {
+                <button type="button" class="btn-save"  (click)="UpdateRecordEmp()">Update Employee</button>
+             }
+             @else 
+             {
+                <button type="button" class="btn-save"  (click)="AddRecordEmp()">Save Employee</button>
+             }
+          <button type="button" class="btn-cancel" (click)="ToggleModel(false)">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</div>

@@ -8,6 +8,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { AttendanceComponent } from './pages/attendance/attendance.component';
 import { ExpensesComponent } from './pages/expenses/expenses.component';
 import { SettingComponent } from './pages/setting/setting.component';
+import { EmployeeComponent } from './pages/employee/employee.component';
 
 export const routes: Routes = [
     {
@@ -55,6 +56,10 @@ export const routes: Routes = [
             {
                 path: 'settings',
                 component: SettingComponent
+            },
+            {
+                path: 'employees',
+                component: EmployeeComponent
             }
         ]
     }
