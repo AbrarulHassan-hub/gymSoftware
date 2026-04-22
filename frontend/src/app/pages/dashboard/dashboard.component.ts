@@ -32,7 +32,8 @@ export class DashboardComponent {
       classes: 'Classes',
       settings: 'Settings',
       expenses: 'Expenses',
-      employees: 'Employees'
+      employees: 'Employees',
+      empPayments: 'Employee Payments'
     };
     this.pagetitle = titles[page] || 'Dashboard';
     this.router.navigate(['dashboard', page]);
