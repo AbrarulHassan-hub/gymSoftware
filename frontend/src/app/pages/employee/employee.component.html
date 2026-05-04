@@ -35,7 +35,7 @@
 <td style="color: #ffffff;">{{ m.phoneNo }}</td>
 <td style="color: #ffffff;">{{ m.empName }}</td>
 <td style="color: #ffffff;">{{ m.empNIC }}</td>
-<td style="color: #ffffff;">{{ m.empAdress }}</td>
+<td style="color: #ffffff;">{{ m.empAddress }}</td>
 <td style="color: #ffffff;">{{ m.status ? 'Active' : 'Inactive' }}</td>
       <td>
         <div class="action-menu">
@@ -65,7 +65,8 @@
         <form class="member-form" (submit)="$event.preventDefault()">
           <div class="f-group">
             <label>Code</label>
-            <input type="text" [(ngModel)]="employeeData.empCode" name="Code" placeholder="Enter Code">
+            <input type="number" [(ngModel)]="employeeData.empCode" name="Code" placeholder="Enter Code">
+
           </div>
           <div class="f-group">
             <label>Phone No</label>
@@ -81,7 +82,7 @@
           </div>
           <div class="f-group">
             <label>Address</label>
-            <input type="text" [(ngModel)]="employeeData.empAdress" name="Address" placeholder="Enter Address">
+            <input type="text" [(ngModel)]="employeeData.empAddress" name="Address" placeholder="Enter Address">
           </div>
            <div class="f-group">
             <label>Status</label>

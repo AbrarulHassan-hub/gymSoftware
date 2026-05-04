@@ -33,7 +33,7 @@ namespace gymsoftware.Repository
                 Employee.PhoneNo = emp.PhoneNo;
                 Employee.EmpName = emp.EmpName;
                 Employee.EmpNIC = emp.EmpNIC;
-                Employee.EmpAdress = emp.EmpAdress;
+                Employee.EmpAddress = emp.EmpAddress;
                 Employee.status = emp.status;
                 await db.SaveChangesAsync();
             }

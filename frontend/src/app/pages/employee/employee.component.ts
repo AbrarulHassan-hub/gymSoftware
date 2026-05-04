@@ -8,7 +8,7 @@ interface Employee {
   phoneNo: string;
   empName: string;
   empNIC: string;
-  empAdress: string;
+  empAddress: string;
   status: boolean;
 }
 
@@ -29,7 +29,7 @@ export class EmployeeComponent implements OnInit {
     empName: '',
     phoneNo: '',
     empNIC: '',
-    empAdress: '',
+    empAddress: '',
     status: false
   }
   ngOnInit(): void {
@@ -46,7 +46,7 @@ export class EmployeeComponent implements OnInit {
       empName: '',
       phoneNo: '',
       empNIC: '',
-      empAdress: '',
+      empAddress: '',
       status: false
     };
     this.ToggleModel(true);
@@ -64,19 +64,25 @@ export class EmployeeComponent implements OnInit {
       }
     );
   }
-  AddRecordEmp()
-  {
-    this.http.post('https://localhost:7233/api/Employee', this.employeeData).subscribe(
-      (response) => {
-        console.log('Employee record added successfully:', response);
-        this.getEmployeeRecord(); 
-        this.ToggleModel(false); 
-      },
-      (error) => {
-        console.error('Error adding employee record:', error);
-      }
-    );
-  }
+  AddRecordEmp() {
+  const payload = {
+    ...this.employeeData,
+    empCode: Number(this.employeeData.empCode),
+    status: (this.employeeData.status as any) === 'true'
+  };
+
+  this.http.post('https://localhost:7233/api/Employee', payload).subscribe(
+    (response) => {
+      console.log('Employee record added successfully:', response);
+      this.getEmployeeRecord();
+      this.ToggleModel(false);
+    },
+    (error) => {
+      console.error('Error adding employee record:', error);
+      console.error('Validation errors:', JSON.stringify(error.error?.errors));
+    }
+  );
+}
 UpdateRecordEmp() {
   const payload = {
     ...this.employeeData,

@@ -7,7 +7,7 @@
         public string? PhoneNo { get; set; }
         public string? EmpName { get; set; }
         public string? EmpNIC { get; set; }
-        public string? EmpAdress { get; set; }
+        public string? EmpAddress { get; set; }
         public Boolean status { get; set; }
     }
 }
